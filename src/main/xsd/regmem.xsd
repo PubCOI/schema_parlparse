@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright 2021 PubCOI.org
+  ~
+  ~ This program is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with this program; if not, write to the Free Software Foundation,
+  ~ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           jaxb:version="2.1"
+           elementFormDefault="qualified">
+
+    <xs:annotation>
+        <xs:documentation>
+            Schema for pulling data from twfy / pw:
+            https://www.theyworkforyou.com/pwdata/scrapedxml/regmem/
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="publicwhip">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:class name="PWRootType"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="regmem" type="RegisterEntryType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="RegisterEntryType">
+        <xs:sequence>
+            <xs:element name="category" type="RegisterCategoryType" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="personid" type="xs:token"/>
+        <xs:attribute name="membername" type="xs:token"/>
+        <xs:attribute name="date" type="xs:date"/>
+    </xs:complexType>
+
+    <xs:complexType name="RegisterCategoryType">
+        <xs:sequence>
+            <xs:element name="record" type="RegisterRecordType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:int"/>
+        <xs:attribute name="name" type="xs:token"/>
+    </xs:complexType>
+
+    <xs:complexType name="RegisterRecordType">
+        <xs:sequence>
+            <xs:element name="item" maxOccurs="unbounded" type="xs:normalizedString">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jaxb:class name="RegisterRecordItem"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -23,7 +23,7 @@
 
     <groupId>org.pubcoi.schemas</groupId>
     <artifactId>parlparse</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>Parlparse data schema</name>
     <url>https://github.com/PubCOI/schema_parlparse</url>
@@ -33,6 +33,7 @@
         <connection>scm:git:git@github.com:PubCOI/schema_parlparse.git</connection>
         <developerConnection>scm:git:git@github.com:PubCOI/schema_parlparse.git</developerConnection>
         <url>https://github.com/PubCOI/schema_parlparse</url>
+    <tag>parlparse-1.0.0</tag>
   </scm>
 
     <licenses>
